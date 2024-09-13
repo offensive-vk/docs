@@ -4,7 +4,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-# open or update publishing PR when there is a push to main
 on:
   workflow_dispatch:
   push:
@@ -19,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: published
-      - name: Reset published branch
+      - name: Reset published Branch
         run: |
           git fetch origin main:main
           git reset --hard main
@@ -30,6 +29,9 @@ jobs:
           branch: published-update
           commit-message: publish updates from main
           labels: area/release
-          title: publish updates from main
+          title: Automated PR - Publish Updates From Main Branch
           body: |
-            Automated pull request for publishing docs updates.
+            # Pull Request Description
+
+            Automated Pull Request for Publishing Docs Updates.
+            Commit Detail: ${{ github.sha }}
